@@ -3,24 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tic Tac Toe Online</title>
+    <title>Dungeon Horror: Treasure Hunt</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Tic Tac Toe</h1>
     <div class="game-container">
-        <div class="cell" data-index="0"></div>
-        <div class="cell" data-index="1"></div>
-        <div class="cell" data-index="2"></div>
-        <div class="cell" data-index="3"></div>
-        <div class="cell" data-index="4"></div>
-        <div class="cell" data-index="5"></div>
-        <div class="cell" data-index="6"></div>
-        <div class="cell" data-index="7"></div>
-        <div class="cell" data-index="8"></div>
+        <h1>🏰 Dungeon Horror 🏚️</h1>
+        <div class="level-info">
+            <span>Level: <span id="level">1</span></span>
+            <span>Poin: <span id="score">0</span></span>
+        </div>
+        <div class="dungeon-map" id="dungeon-map"></div>
+        <div class="game-log" id="game-log"></div>
+        <div class="player-actions">
+            <button id="move-btn">🚶‍♂️ Explore</button>
+            <button id="fight-btn">⚔️ Fight NPC</button>
+            <button id="open-treasure-btn">💎 Open Chest</button>
+        </div>
+        <audio id="background-sound" loop>
+            <source src="sounds/background.mp3" type="audio/mpeg">
+        </audio>
     </div>
-    <div class="status">Giliran: <span id="current-player">X</span></div>
-    <button id="reset-btn">Reset Game</button>
     <script src="script.js"></script>
 </body>
-</html
+</html>
