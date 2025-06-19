@@ -1,55 +1,88 @@
-let currentPlayer = "X";
-let gameBoard = ["", "", "", "", "", "", "", "", ""];
-const winningConditions = [
-    [0, 1, 2], [3, 4, 5], [6, 7, 8], // Baris
-    [0, 3, 6], [1, 4, 7], [2, 5, 8], // Kolom
-    [0, 4, 8], [2, 4, 6]             // Diagonal
-];
+// Game State
+const gameState = {
+    level: 1,
+    score: 0,
+    hasTreasure: false,
+    npcDefeated: false,
+    dungeonMap: [
+        "💀🌫️🚪", 
+        "🔑👻💎", 
+        "🩸🕯️⚔️"
+    ],
+    npcs: ["👻 Ghost", "🧟 Zombie", "🦇 Vampire", "👹 Demon", "🕷️ Spider Queen"],
+    treasures: ["Gold (100)", "Diamond (500)", "Cursed Amulet", "Health Potion", "Magic Sword"]
+};
 
-const cells = document.querySelectorAll(".cell");
-const statusDisplay = document.querySelector(".status");
-const resetButton = document.getElementById("reset-btn");
+// DOM Elements
+const levelDisplay = document.getElementById("level");
+const scoreDisplay = document.getElementById("score");
+const dungeonMapDisplay = document.getElementById("dungeon-map");
+const gameLogDisplay = document.getElementById("game-log");
+const moveBtn = document.getElementById("move-btn");
+const fightBtn = document.getElementById("fight-btn");
+const openTreasureBtn = document.getElementById("open-treasure-btn");
+const backgroundSound = document.getElementById("background-sound");
 
-// Fungsi untuk menangani klik pemain
-function handleCellClick(e) {
-    const cellIndex = parseInt(e.target.getAttribute("data-index"));
+// Start Game
+function initGame() {
+    updateUI();
+    backgroundSound.play();
+    addLog("You enter the dark dungeon... Find the treasure!");
+}
 
-    if (gameBoard[cellIndex] !== "" || checkWinner()) return;
+// Update UI
+function updateUI() {
+    levelDisplay.textContent = gameState.level;
+    scoreDisplay.textContent = gameState.score;
+    dungeonMapDisplay.textContent = gameState.dungeonMap.join("\n");
+}
 
-    gameBoard[cellIndex] = currentPlayer;
-    e.target.textContent = currentPlayer;
+// Add Log Message
+function addLog(message) {
+    gameLogDisplay.innerHTML += `> ${message}<br>`;
+    gameLogDisplay.scrollTop = gameLogDisplay.scrollHeight;
+}
 
-    if (checkWinner()) {
-        statusDisplay.innerHTML = `Pemenang: <span id="current-player">${currentPlayer}</span>`;
+// Move to Next Area
+moveBtn.addEventListener("click", () => {
+    if (gameState.level >= 5) {
+        addLog("You escaped the dungeon! 🎉");
         return;
     }
+    gameState.level++;
+    gameState.hasTreasure = false;
+    gameState.npcDefeated = false;
+    addLog(`Entering Level ${gameState.level}...`);
+    updateUI();
+});
 
-    if (!gameBoard.includes("")) {
-        statusDisplay.textContent = "Game Seri!";
+// Fight NPC
+fightBtn.addEventListener("click", () => {
+    if (gameState.npcDefeated) {
+        addLog("No enemies here!");
         return;
     }
+    const npc = gameState.npcs[Math.floor(Math.random() * gameState.npcs.length)];
+    const damage = Math.floor(Math.random() * 50) + 10;
+    gameState.score += damage;
+    gameState.npcDefeated = true;
+    addLog(`⚔️ You defeated ${npc}! +${damage} points!`);
+    updateUI();
+});
 
-    currentPlayer = currentPlayer === "X" ? "O" : "X";
-    statusDisplay.innerHTML = `Giliran: <span id="current-player">${currentPlayer}</span>`;
-}
+// Open Treasure Chest
+openTreasureBtn.addEventListener("click", () => {
+    if (gameState.hasTreasure) {
+        addLog("No treasure here...");
+        return;
+    }
+    const treasure = gameState.treasures[Math.floor(Math.random() * gameState.treasures.length)];
+    const reward = Math.floor(Math.random() * 300) + 100;
+    gameState.score += reward;
+    gameState.hasTreasure = true;
+    addLog(`💎 You found ${treasure}! +${reward} points!`);
+    updateUI();
+});
 
-// Fungsi untuk memeriksa pemenang
-function checkWinner() {
-    return winningConditions.some(condition => {
-        return condition.every(index => {
-            return gameBoard[index] === currentPlayer;
-        });
-    });
-}
-
-// Fungsi untuk mereset game
-function resetGame() {
-    gameBoard = ["", "", "", "", "", "", "", "", ""];
-    currentPlayer = "X";
-    statusDisplay.innerHTML = `Giliran: <span id="current-player">X</span>`;
-    cells.forEach(cell => cell.textContent = "");
-}
-
-// Event Listeners
-cells.forEach(cell => cell.addEventListener("click", handleCellClick));
-resetButton.addEventListener("click", resetGame)
+// Start the game
+initGame();
