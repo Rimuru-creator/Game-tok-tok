@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -16,6 +17,7 @@
             --player-bg: #ffffff;
             --progress-bg: #e0e0e0;
             --progress-fill: #6c5ce7;
+            --mod-color: #ff7675;
         }
 
         .dark-mode {
@@ -29,6 +31,7 @@
             --player-bg: #1a1a1a;
             --progress-bg: #333333;
             --progress-fill: #a78bfa;
+            --mod-color: #e84393;
         }
 
         body {
@@ -82,6 +85,12 @@
             color: var(--primary-color);
         }
 
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
         .theme-toggle {
             background: none;
             border: none;
@@ -93,11 +102,249 @@
             gap: 0.5rem;
         }
 
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .user-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .mod-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--mod-color);
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            width: 200px;
+            overflow: hidden;
+            display: none;
+            z-index: 1000;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            padding: 0.8rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: background-color 0.2s;
+        }
+
+        .dropdown-item:hover {
+            background-color: rgba(0,0,0,0.05);
+        }
+
+        .dropdown-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background-color: var(--secondary-color);
+            margin: 0.3rem 0;
+        }
+
         /* Main Container */
         .container {
             max-width: 1400px;
             margin: 2rem auto;
             padding: 0 2rem;
+        }
+
+        /* Login Modal */
+        .login-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1001;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-modal.show {
+            display: flex;
+        }
+
+        .login-content {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            width: 90%;
+            max-width: 400px;
+            overflow: hidden;
+            box-shadow: 0 5px 30px rgba(0,0,0,0.3);
+        }
+
+        .login-header {
+            padding: 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+        }
+
+        .login-title {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .login-body {
+            padding: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--secondary-color);
+            border-radius: 6px;
+            background-color: var(--input-bg);
+            color: var(--text-color);
+            font-size: 1rem;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 0.8rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .login-footer {
+            text-align: center;
+            padding: 0 1.5rem 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .close-login {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Moderator Panel */
+        .mod-panel {
+            display: none;
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .mod-panel.show {
+            display: block;
+        }
+
+        .panel-title {
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            color: var(--mod-color);
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+
+        .panel-title i {
+            font-size: 1.3rem;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--secondary-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .tab-btn {
+            padding: 0.7rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            font-weight: 500;
+            cursor: pointer;
+            color: var(--text-color);
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            border-bottom-color: var(--mod-color);
+            color: var(--mod-color);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.show {
+            display: block;
+        }
+
+        .upload-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .form-full-width {
+            grid-column: span 2;
         }
 
         /* Hero Section */
@@ -108,41 +355,6 @@
             border-radius: 12px;
             margin-bottom: 3rem;
             text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            max-width: 700px;
-            margin: 0 auto 2rem;
-        }
-
-        .search-bar {
-            max-width: 600px;
-            margin: 0 auto;
-            display: flex;
-        }
-
-        .search-bar input {
-            flex: 1;
-            padding: 0.8rem 1rem;
-            border: none;
-            border-radius: 8px 0 0 8px;
-            font-size: 1rem;
-        }
-
-        .search-bar button {
-            padding: 0 1.5rem;
-            background-color: #333;
-            color: white;
-            border: none;
-            border-radius: 0 8px 8px 0;
-            cursor: pointer;
-            font-size: 1rem;
         }
 
         /* Anime Sections */
@@ -558,6 +770,14 @@
                 order: 2;
                 width: 100%;
             }
+
+            .upload-form {
+                grid-template-columns: 1fr;
+            }
+
+            .form-full-width {
+                grid-column: span 1;
+            }
         }
     </style>
 </head>
@@ -576,13 +796,183 @@
             <a href="#">Daftar</a>
         </div>
         
-        <button class="theme-toggle" id="themeToggle">
-            <i class="fas fa-moon" id="themeIcon"></i>
-        </button>
+        <div class="nav-right">
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon" id="themeIcon"></i>
+            </button>
+            
+            <div class="user-profile" id="userProfile">
+                <div class="user-avatar" id="userAvatar">G</div>
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <a href="#" class="dropdown-item" id="modPanelBtn">
+                        <i class="fas fa-user-shield"></i> Panel Moderator
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a href="#" class="dropdown-item">
+                        <i class="fas fa-cog"></i> Pengaturan
+                    </a>
+                    <a href="#" class="dropdown-item" id="logoutBtn">
+                        <i class="fas fa-sign-out-alt"></i> Keluar
+                    </a>
+                </div>
+            </div>
+        </div>
     </nav>
+
+    <!-- Login Modal -->
+    <div class="login-modal" id="loginModal">
+        <div class="login-content">
+            <div class="login-header">
+                <h2 class="login-title">Masuk ke Akun</h2>
+                <button class="close-login" id="closeLogin">&times;</button>
+            </div>
+            <div class="login-body">
+                <div class="form-group">
+                    <label for="loginUsername">Nama Pengguna</label>
+                    <input type="text" id="loginUsername" placeholder="Masukkan nama pengguna">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Kata Sandi</label>
+                    <input type="password" id="loginPassword" placeholder="Masukkan kata sandi">
+                </div>
+                <button class="login-btn" id="loginBtn">Masuk</button>
+            </div>
+            <div class="login-footer">
+                Belum punya akun? <a href="#" style="color: var(--primary-color);">Daftar sekarang</a>
+            </div>
+        </div>
+    </div>
 
     <!-- Main Content -->
     <div class="container">
+        <!-- Moderator Panel -->
+        <div class="mod-panel" id="modPanel">
+            <h2 class="panel-title">
+                <i class="fas fa-user-shield"></i> Panel Moderator
+            </h2>
+            
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="anime-tab">Upload Anime</button>
+                <button class="tab-btn" data-tab="music-tab">Upload Musik</button>
+            </div>
+            
+            <div class="tab-content show" id="anime-tab">
+                <form class="upload-form" id="animeUploadForm">
+                    <div class="form-group">
+                        <label for="animeTitle">Judul Anime</label>
+                        <input type="text" id="animeTitle" placeholder="Contoh: Jujutsu Kaisen" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="animeEpisode">Episode</label>
+                        <input type="number" id="animeEpisode" placeholder="Nomor episode" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="animeSeason">Musim</label>
+                        <input type="number" id="animeSeason" placeholder="Nomor musim (jika ada)">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="animeYear">Tahun Rilis</label>
+                        <input type="number" id="animeYear" placeholder="Tahun rilis">
+                    </div>
+                    
+                    <div class="form-group form-full-width">
+                        <label for="animeDescription">Deskripsi</label>
+                        <textarea id="animeDescription" rows="3" placeholder="Deskripsi singkat tentang episode ini" style="width: 100%; padding: 0.8rem; border: 1px solid var(--secondary-color); border-radius: 6px; background-color: var(--input-bg); color: var(--text-color); font-family: inherit;"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="animeGenre">Genre</label>
+                        <select id="animeGenre" style="width: 100%; padding: 0.8rem; border: 1px solid var(--secondary-color); border-radius: 6px; background-color: var(--input-bg); color: var(--text-color);">
+                            <option value="">Pilih genre</option>
+                            <option value="action">Action</option>
+                            <option value="adventure">Adventure</option>
+                            <option value="comedy">Comedy</option>
+                            <option value="drama">Drama</option>
+                            <option value="fantasy">Fantasy</option>
+                            <option value="horror">Horror</option>
+                            <option value="romance">Romance</option>
+                            <option value="sci-fi">Sci-Fi</option>
+                            <option value="slice-of-life">Slice of Life</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="animeQuality">Kualitas</label>
+                        <select id="animeQuality" style="width: 100%; padding: 0.8rem; border: 1px solid var(--secondary-color); border-radius: 6px; background-color: var(--input-bg); color: var(--text-color);">
+                            <option value="480p">480p</option>
+                            <option value="720p" selected>720p</option>
+                            <option value="1080p">1080p</option>
+                            <option value="4K">4K</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group form-full-width">
+                        <label for="animeVideo">File Video</label>
+                        <input type="file" id="animeVideo" accept="video/*" required style="width: 100%; padding: 0.5rem; border: 1px solid var(--secondary-color); border-radius: 6px; background-color: var(--input-bg); color: var(--text-color);">
+                    </div>
+                    
+                    <div class="form-group form-full-width">
+                        <label for="animeThumbnail">Thumbnail (Opsional)</label>
+                        <input type="file" id="animeThumbnail" accept="image/*" style="width: 100%; padding: 0.5rem; border: 1px solid var(--secondary-color); border-radius: 6px; background-color: var(--input-bg); color: var(--text-color);">
+                    </div>
+                    
+                    <div class="form-group form-full-width">
+                        <button type="submit" style="width: 100%; padding: 0.8rem; background-color: var(--mod-color); color: white; border: none; border-radius: 6px; font-size: 1rem; font-weight: 500; cursor: pointer;">
+                            <i class="fas fa-upload"></i> Upload Anime
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="tab-content" id="music-tab">
+                <form class="upload-form" id="musicUploadForm">
+                    <div class="form-group">
+                        <label for="musicTitle">Judul Lagu</label>
+                        <input type="text" id="musicTitle" placeholder="Contoh: Gurenge" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="musicArtist">Artis</label>
+                        <input type="text" id="musicArtist" placeholder="Contoh: LiSA" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="musicAnime">Anime (Opsional)</label>
+                        <input type="text" id="musicAnime" placeholder="Anime terkait (jika ada)">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="musicType">Jenis Lagu</label>
+                        <select id="musicType" style="width: 100%; padding: 0.8rem; border: 1px solid var(--secondary-color); border-radius: 6px; background-color: var(--input-bg); color: var(--text-color);">
+                            <option value="opening">Opening</option>
+                            <option value="ending">Ending</option>
+                            <option value="ost">OST</option>
+                            <option value="insert-song">Insert Song</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group form-full-width">
+                        <label for="musicFile">File Audio</label>
+                        <input type="file" id="musicFile" accept="audio/*" required style="width: 100%; padding: 0.5rem; border: 1px solid var(--secondary-color); border-radius: 6px; background-color: var(--input-bg); color: var(--text-color);">
+                    </div>
+                    
+                    <div class="form-group form-full-width">
+                        <label for="musicCover">Cover Art (Opsional)</label>
+                        <input type="file" id="musicCover" accept="image/*" style="width: 100%; padding: 0.5rem; border: 1px solid var(--secondary-color); border-radius: 6px; background-color: var(--input-bg); color: var(--text-color);">
+                    </div>
+                    
+                    <div class="form-group form-full-width">
+                        <button type="submit" style="width: 100%; padding: 0.8rem; background-color: var(--mod-color); color: white; border: none; border-radius: 6px; font-size: 1rem; font-weight: 500; cursor: pointer;">
+                            <i class="fas fa-upload"></i> Upload Musik
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <!-- Hero Section -->
         <section class="hero">
             <h1>Streaming Anime Berkualitas Tinggi</h1>
@@ -611,205 +1001,6 @@
                         <div class="anime-meta">
                             <span>Action, Supernatural</span>
                             <span>1080p</span>
-                        </div>
-                        <div class="anime-actions">
-                            <button class="action-btn stream-btn">
-                                <i class="fas fa-play"></i> Stream
-                            </button>
-                            <button class="action-btn download-btn">
-                                <i class="fas fa-download"></i> Download
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="anime-card" data-video="https://example.com/video2.mp4" data-title="Demon Slayer: Entertainment District Arc">
-                    <div class="anime-thumbnail">
-                        <img src="https://via.placeholder.com/300x170/ff4757/ffffff?text=Demon+Slayer" alt="Anime Thumbnail">
-                    </div>
-                    <div class="anime-info">
-                        <h3 class="anime-title">Demon Slayer: Entertainment District Arc</h3>
-                        <div class="anime-meta">
-                            <span>Action, Fantasy</span>
-                            <span>1080p</span>
-                        </div>
-                        <div class="anime-actions">
-                            <button class="action-btn stream-btn">
-                                <i class="fas fa-play"></i> Stream
-                            </button>
-                            <button class="action-btn download-btn">
-                                <i class="fas fa-download"></i> Download
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="anime-card" data-video="https://example.com/video3.mp4" data-title="Attack on Titan Final Season">
-                    <div class="anime-thumbnail">
-                        <img src="https://via.placeholder.com/300x170/1e90ff/ffffff?text=Attack+on+Titan" alt="Anime Thumbnail">
-                    </div>
-                    <div class="anime-info">
-                        <h3 class="anime-title">Attack on Titan Final Season</h3>
-                        <div class="anime-meta">
-                            <span>Action, Drama</span>
-                            <span>720p</span>
-                        </div>
-                        <div class="anime-actions">
-                            <button class="action-btn stream-btn">
-                                <i class="fas fa-play"></i> Stream
-                            </button>
-                            <button class="action-btn download-btn">
-                                <i class="fas fa-download"></i> Download
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="anime-card" data-video="https://example.com/video4.mp4" data-title="My Hero Academia Season 6">
-                    <div class="anime-thumbnail">
-                        <img src="https://via.placeholder.com/300x170/ff6348/ffffff?text=My+Hero+Academia" alt="Anime Thumbnail">
-                    </div>
-                    <div class="anime-info">
-                        <h3 class="anime-title">My Hero Academia Season 6</h3>
-                        <div class="anime-meta">
-                            <span>Action, Superhero</span>
-                            <span>1080p</span>
-                        </div>
-                        <div class="anime-actions">
-                            <button class="action-btn stream-btn">
-                                <i class="fas fa-play"></i> Stream
-                            </button>
-                            <button class="action-btn download-btn">
-                                <i class="fas fa-download"></i> Download
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="anime-card" data-video="https://example.com/video5.mp4" data-title="Spy x Family Part 2">
-                    <div class="anime-thumbnail">
-                        <img src="https://via.placeholder.com/300x170/2ed573/ffffff?text=Spy+x+Family" alt="Anime Thumbnail">
-                    </div>
-                    <div class="anime-info">
-                        <h3 class="anime-title">Spy x Family Part 2</h3>
-                        <div class="anime-meta">
-                            <span>Comedy, Action</span>
-                            <span>720p</span>
-                        </div>
-                        <div class="anime-actions">
-                            <button class="action-btn stream-btn">
-                                <i class="fas fa-play"></i> Stream
-                            </button>
-                            <button class="action-btn download-btn">
-                                <i class="fas fa-download"></i> Download
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Anime Populer -->
-        <section>
-            <h2 class="section-title">
-                <span>Anime Populer</span>
-                <a href="#" class="view-all">Lihat Semua</a>
-            </h2>
-            
-            <div class="anime-grid">
-                <div class="anime-card" data-video="https://example.com/video6.mp4" data-title="One Piece Episode 1028">
-                    <div class="anime-thumbnail">
-                        <img src="https://via.placeholder.com/300x170/ff7f50/ffffff?text=One+Piece" alt="Anime Thumbnail">
-                    </div>
-                    <div class="anime-info">
-                        <h3 class="anime-title">One Piece Episode 1028</h3>
-                        <div class="anime-meta">
-                            <span>Adventure, Action</span>
-                            <span>720p</span>
-                        </div>
-                        <div class="anime-actions">
-                            <button class="action-btn stream-btn">
-                                <i class="fas fa-play"></i> Stream
-                            </button>
-                            <button class="action-btn download-btn">
-                                <i class="fas fa-download"></i> Download
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="anime-card" data-video="https://example.com/video7.mp4" data-title="Chainsaw Man Episode 10">
-                    <div class="anime-thumbnail">
-                        <img src="https://via.placeholder.com/300x170/ff6b81/ffffff?text=Chainsaw+Man" alt="Anime Thumbnail">
-                    </div>
-                    <div class="anime-info">
-                        <h3 class="anime-title">Chainsaw Man Episode 10</h3>
-                        <div class="anime-meta">
-                            <span>Action, Horror</span>
-                            <span>1080p</span>
-                        </div>
-                        <div class="anime-actions">
-                            <button class="action-btn stream-btn">
-                                <i class="fas fa-play"></i> Stream
-                            </button>
-                            <button class="action-btn download-btn">
-                                <i class="fas fa-download"></i> Download
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="anime-card" data-video="https://example.com/video8.mp4" data-title="Blue Lock Episode 15">
-                    <div class="anime-thumbnail">
-                        <img src="https://via.placeholder.com/300x170/70a1ff/ffffff?text=Blue+Lock" alt="Anime Thumbnail">
-                    </div>
-                    <div class="anime-info">
-                        <h3 class="anime-title">Blue Lock Episode 15</h3>
-                        <div class="anime-meta">
-                            <span>Sports, Drama</span>
-                            <span>720p</span>
-                        </div>
-                        <div class="anime-actions">
-                            <button class="action-btn stream-btn">
-                                <i class="fas fa-play"></i> Stream
-                            </button>
-                            <button class="action-btn download-btn">
-                                <i class="fas fa-download"></i> Download
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="anime-card" data-video="https://example.com/video9.mp4" data-title="Vinland Saga Season 2">
-                    <div class="anime-thumbnail">
-                        <img src="https://via.placeholder.com/300x170/5352ed/ffffff?text=Vinland+Saga" alt="Anime Thumbnail">
-                    </div>
-                    <div class="anime-info">
-                        <h3 class="anime-title">Vinland Saga Season 2</h3>
-                        <div class="anime-meta">
-                            <span>Action, Historical</span>
-                            <span>1080p</span>
-                        </div>
-                        <div class="anime-actions">
-                            <button class="action-btn stream-btn">
-                                <i class="fas fa-play"></i> Stream
-                            </button>
-                            <button class="action-btn download-btn">
-                                <i class="fas fa-download"></i> Download
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="anime-card" data-video="https://example.com/video10.mp4" data-title="The Eminence in Shadow">
-                    <div class="anime-thumbnail">
-                        <img src="https://via.placeholder.com/300x170/2f3542/ffffff?text=The+Eminence+in+Shadow" alt="Anime Thumbnail">
-                    </div>
-                    <div class="anime-info">
-                        <h3 class="anime-title">The Eminence in Shadow</h3>
-                        <div class="anime-meta">
-                            <span>Action, Comedy</span>
-                            <span>720p</span>
                         </div>
                         <div class="anime-actions">
                             <button class="action-btn stream-btn">
@@ -920,6 +1111,159 @@
                 themeIcon.classList.add('fa-moon');
                 localStorage.setItem('theme', 'light');
             }
+        });
+        
+        // Login Functionality
+        const loginModal = document.getElementById('loginModal');
+        const closeLogin = document.getElementById('closeLogin');
+        const loginBtn = document.getElementById('loginBtn');
+        const userProfile = document.getElementById('userProfile');
+        const userAvatar = document.getElementById('userAvatar');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const modPanelBtn = document.getElementById('modPanelBtn');
+        const modPanel = document.getElementById('modPanel');
+        
+        // Check if user is logged in (in a real app, this would be from session)
+        let isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+        let isModerator = localStorage.getItem('isModerator') === 'true';
+        
+        function updateLoginState() {
+            if (isLoggedIn) {
+                userAvatar.textContent = 'R'; // First letter of Rimuru
+                if (isModerator) {
+                    userAvatar.innerHTML += '<div class="mod-badge"><i class="fas fa-shield-alt"></i></div>';
+                }
+                loginModal.classList.remove('show');
+            } else {
+                userAvatar.textContent = 'G'; // Guest
+                loginModal.classList.add('show');
+            }
+        }
+        
+        // Show login modal if not logged in
+        if (!isLoggedIn) {
+            loginModal.classList.add('show');
+        } else {
+            updateLoginState();
+        }
+        
+        // Login button click
+        loginBtn.addEventListener('click', () => {
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+            
+            // Check for moderator credentials
+            if (username === 'Rimuru' && password === 'Rimuru 091626') {
+                isLoggedIn = true;
+                isModerator = true;
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('isModerator', 'true');
+                updateLoginState();
+            } else if (username && password) {
+                // Regular user login (demo)
+                isLoggedIn = true;
+                isModerator = false;
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('isModerator', 'false');
+                updateLoginState();
+            } else {
+                alert('Silakan masukkan nama pengguna dan kata sandi');
+            }
+        });
+        
+        closeLogin.addEventListener('click', () => {
+            loginModal.classList.remove('show');
+        });
+        
+        // User profile dropdown
+        userProfile.addEventListener('click', () => {
+            if (isLoggedIn) {
+                dropdownMenu.classList.toggle('show');
+            } else {
+                loginModal.classList.add('show');
+            }
+        });
+        
+        // Logout functionality
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            isLoggedIn = false;
+            isModerator = false;
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('isModerator');
+            dropdownMenu.classList.remove('show');
+            modPanel.classList.remove('show');
+            updateLoginState();
+            loginModal.classList.add('show');
+        });
+        
+        // Moderator panel toggle
+        modPanelBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modPanel.classList.toggle('show');
+            dropdownMenu.classList.remove('show');
+        });
+        
+        // Tab switching in moderator panel
+        const tabBtns = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        tabBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const tabId = btn.getAttribute('data-tab');
+                
+                // Update active tab button
+                tabBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Show corresponding tab content
+                tabContents.forEach(content => {
+                    content.classList.remove('show');
+                    if (content.id === tabId) {
+                        content.classList.add('show');
+                    }
+                });
+            });
+        });
+        
+        // Anime upload form submission
+        const animeUploadForm = document.getElementById('animeUploadForm');
+        animeUploadForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const title = document.getElementById('animeTitle').value;
+            const episode = document.getElementById('animeEpisode').value;
+            const season = document.getElementById('animeSeason').value;
+            const year = document.getElementById('animeYear').value;
+            const description = document.getElementById('animeDescription').value;
+            const genre = document.getElementById('animeGenre').value;
+            const quality = document.getElementById('animeQuality').value;
+            
+            // In a real app, you would upload files to server here
+            alert(`Anime berhasil diupload!\nJudul: ${title} Episode ${episode}\nGenre: ${genre}\nKualitas: ${quality}`);
+            
+            // Reset form
+            animeUploadForm.reset();
+        });
+        
+        // Music upload form submission
+        const musicUploadForm = document.getElementById('musicUploadForm');
+        musicUploadForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get form values
+            const title = document.getElementById('musicTitle').value;
+            const artist = document.getElementById('musicArtist').value;
+            const anime = document.getElementById('musicAnime').value;
+            const type = document.getElementById('musicType').value;
+            
+            // In a real app, you would upload files to server here
+            alert(`Musik berhasil diupload!\nJudul: ${title}\nArtis: ${artist}\nJenis: ${type}`);
+            
+            // Reset form
+            musicUploadForm.reset();
         });
         
         // Video Player Functionality
