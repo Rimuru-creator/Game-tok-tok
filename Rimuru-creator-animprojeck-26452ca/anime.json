@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "title": "One Piece",
+    "genre": ["Action", "Adventure"],
+    "image": "https://link-gambar-onepiece.jpg",
+    "synopsis": "Petualangan Luffy dan kru bajak laut.",
+    "episodes": [
+      {
+        "number": 1100,
+        "title": "One Piece Episode 1100",
+        "video_url": "https://link-stream-onepiece-1100.mp4"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Naruto",
+    "genre": ["Action", "Fantasy"],
+    "image": "https://link-gambar-naruto.jpg",
+    "synopsis": "Perjuangan Naruto menjadi Hokage.",
+    "episodes": [
+      {
+        "number": 1,
+        "title": "Naruto Episode 1",
+        "video_url": "https://link-stream-naruto-1.mp4"
+      }
+    ]
+  }
+]
